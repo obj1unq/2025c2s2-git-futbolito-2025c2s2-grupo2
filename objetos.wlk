@@ -16,6 +16,11 @@ object lionel {
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
+
+	method levantarla() {
+		self.validarPelotaEnPie()
+		balon.elevar()
+	}
 	
 	method taquito() {
 		self.validarPelotaEnPie()
@@ -24,7 +29,7 @@ object lionel {
 
 	method validarPelotaEnPie() {
 		if(position != balon.position()){
-			self.error("la pelota no esta en el pie")
+			self.error("La pelota no esta en el pie")
 		}
 	}
 }
@@ -32,5 +37,14 @@ object lionel {
 
 object pelota {
 	const property image="pelota.png"
-	var property position = game.at(5,5)	
+	var property position = game.at(5,5)
+
+	method elevar() {
+		position = position.up(1)
+		game.schedule(2000, {self.descender()})
+	}
+
+	method descender() {
+		position = position.down(1)
+	}	
 }
