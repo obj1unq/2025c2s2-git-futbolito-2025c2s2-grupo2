@@ -1,4 +1,4 @@
-/** First Wollok example */
+
 import wollok.game.*
 
 object lionel {
@@ -32,7 +32,18 @@ object lionel {
 			self.error("La pelota no esta en el pie")
 		}
 	}
+
+	method patear() {
+		self.validarPelotaEnPie()
+		self.patearPelota()
+	}
+
+	method patearPelota() {
+		balon.desplazar()
+	  
+	}
 }
+
 
 
 object pelota {
@@ -46,5 +57,13 @@ object pelota {
 
 	method descender() {
 		position = position.down(1)
+	}
+
+	method desplazar() {
+		var posx = position.x().max(0) + 3
+		var posxx = posx.min(game.width()-1)
+		position= game.at(posxx, position.y())
+	  
 	}	
 }
+
