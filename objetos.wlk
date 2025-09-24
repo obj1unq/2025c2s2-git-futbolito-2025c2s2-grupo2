@@ -2,8 +2,8 @@
 import wollok.game.*
 
 object lionel {
-	
 	var property position = game.at(3,5)
+	var property balon = pelota
 	
 	method image() {
 		return "lionel-titular.png"
@@ -17,6 +17,16 @@ object lionel {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
 	
+	method taquito() {
+		self.validarPelotaEnPie()
+		balon.position(game.at((balon.position().x()-2).max(0), balon.position().y()))
+	}
+
+	method validarPelotaEnPie() {
+		if(position != balon.position()){
+			self.error("la pelota no esta en el pie")
+		}
+	}
 }
 
 
